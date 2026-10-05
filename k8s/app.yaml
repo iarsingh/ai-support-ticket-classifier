@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-support-ticket-classifier
+  labels:
+    app: ai-support-ticket-classifier
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-support-ticket-classifier
+  template:
+    metadata:
+      labels:
+        app: ai-support-ticket-classifier
+    spec:
+      containers:
+        - name: api
+          image: ai-support-ticket-classifier:local
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /v1/readyz
+              port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-support-ticket-classifier
+spec:
+  selector:
+    app: ai-support-ticket-classifier
+  ports:
+    - port: 80
+      targetPort: 8080

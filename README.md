@@ -1,5 +1,12 @@
 # AI Support Ticket Classifier
 
+## Overview
+
+A support ticket classifier that assigns the same labels as the companion machine learning classifier, kept as a separate NLP-facing service. Tickets posted to `POST /classify` are labelled by matching their words against a lexicon rather than calling a hosted language model, so results are repeatable. A versioned `/v1` ops API adds workspaces, tenant isolation, job approval and audit records.
+
+- **Built with:** Python, pytest, Docker, GitHub Actions
+- **Scope:** Local laptop lab with tests; no hosted model and no production changes.
+
 <!-- project-guide:start -->
 ## Project guide
 
